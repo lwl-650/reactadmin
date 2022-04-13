@@ -29,7 +29,7 @@ export default function tab({ value = "",title, children }: TabProps) {
   const { SubMenu } = Menu
   // useEffect(() => {
   //   console.log(11)
-  // },collapsed);
+  // },collapsed);给i他
 
 
   const [collapsed, setCollapsed] = useState(false)
@@ -41,7 +41,7 @@ export default function tab({ value = "",title, children }: TabProps) {
     collapsed ? setCollapsed(false) : setCollapsed(true)
   };
 
-  console.log(title)
+  console.log(title,"==============")
   const fn= ({ key=""}:TabProps)=> {
 
     var arr = [];
