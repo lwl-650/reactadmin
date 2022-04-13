@@ -20,11 +20,12 @@ import store from "../../redux/store"
 interface TabProps {
   value?: string;
   children?: React.ReactNode; // 自己定义children的类型
-  key?:string
-  title?:string
+  key?: string
+  title?: string
+  color?:string
 }
 
-export default function tab({ value = "",title, children }: TabProps) {
+export default function tab({ value = "", title, children }: TabProps) {
   const { Header, Content, Sider } = Layout;
   const { SubMenu } = Menu
   // useEffect(() => {
@@ -34,26 +35,35 @@ export default function tab({ value = "",title, children }: TabProps) {
 
   const [collapsed, setCollapsed] = useState(false)
   const [routerArr, setRouterArr] = useState(JSON.parse(localStorage.getItem("store") || '["首页"]'))
-  // const [tagList, setTagList] = useState(JSON.parse(localStorage.getItem("tagList") || "") || ["首页"])
+  const [tagList, setTagList] = useState(JSON.parse(localStorage.getItem("tagList") || '[{"title":"首页","color":"default"}]'))
 
 
   const toggle = (): void => {
     collapsed ? setCollapsed(false) : setCollapsed(true)
   };
+  const fn = ({ key = "" }: TabProps) => {
+    console.log(key.indexOf(","))
 
-  console.log(title,"==============")
-  const fn= ({ key=""}:TabProps)=> {
-
+    // tagList.forEach(element => {
+      
+    // });
+    if(key.indexOf(",")<0){
+      console.log(key)
+    }else{
+     console.log( key.slice(key.indexOf(",")+1))
+    }
     var arr = [];
-    arr =key.split(',')
+    arr = key.split(',')
     localStorage.setItem('store', JSON.stringify(arr))
     setRouterArr(arr)
+
+    // console.log()
 
     // console.log(routerArr)
     // store.dispatch(createBreadAction(routerArr))
     // console.log(store.getState())
   }
-  const getChange = (e:object) => {
+  const getChange = (e: object) => {
     // console.log(routerArr)
     // console.log(e)
     // routerArr.push(e[0])
@@ -136,24 +146,25 @@ export default function tab({ value = "",title, children }: TabProps) {
               <Tag icon={<ExclamationCircleOutlined />} color="warning">
                 warning
               </Tag> */}
-              {/* {
-                tagList.map((item: string, index: string) => {
-                  return <Tag closable icon={<ClockCircleOutlined />} color="#3b5999">
-                    {item}
+              {/* color="#3b5999" */}
+              {
+                tagList.map(({title}:TabProps,{color}:TabProps, index: string) => {
+                  return <Tag className='hover' closable key={index} icon={<ClockCircleOutlined />} color={color}>
+                    {title}
                   </Tag>
                 })
-              } */}
-              <Tag closable icon={<ClockCircleOutlined />} color="#3b5999">
+              }
+              {/* <Tag closable icon={<ClockCircleOutlined />} color="#3b5999">
                 waiting
               </Tag>
               <Tag icon={<MinusCircleOutlined />} color="default">
                 stop
-              </Tag>
+              </Tag> */}
             </div>
           </div>
         </Header>
 
-        <Content style={{backgroundColor:"#ffffff"}}>
+        <Content style={{ backgroundColor: "#ffffff" }}>
           {/* {props.children} */}
           {children}
         </Content>
