@@ -1,0 +1,38 @@
+.rBox{
+    // border: 1px solid red;
+    width: 100%;
+}
+.topBox{
+    // border: 1px solid red;
+    height: 80px;
+    padding-bottom: .0625rem;
+    width: 100%;
+    position: relative;
+    box-shadow: 0rem 0rem 0.1rem 0.025rem #ccc;
+    .progress{
+        position: absolute;
+        // border: 1px solid red;
+        top: -12px;
+        left: 0rem;
+    }
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    padding-left: .1875rem;
+    // border: 1px solid red;
+    padding-top: 5px;
+}
+.site-page-header{
+    // border: 1px solid green;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+.tag{
+    margin-top: 6px;
+    // border: 1px solid red;
+    display: flex;
+    padding-left: .1875rem;
+}

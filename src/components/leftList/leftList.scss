@@ -1,0 +1,23 @@
+.box{
+    // border: 1px solid red;
+    box-shadow: 0rem 0rem 0.025rem 0.025rem rgb(235, 229, 229);
+    background: #000;
+    .beforL{
+        // margin-right: 0px;
+        display: block;
+        margin-left: auto;
+        width: 0.925rem;
+        // height: 50px;
+    }
+    .afterL{
+        // margin-right: 0px;
+        display: block;
+        margin-right: auto;
+        width: 0.925rem;
+    }
+}
+.top{
+    height:60px;
+    background: #000;
+    box-sizing: border-box;
+}
