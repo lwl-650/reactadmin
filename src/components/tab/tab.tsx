@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react'
+import React, { useState, useEffect, Component,FC, ReactElement } from 'react'
 import { Layout, Menu, Breadcrumb, PageHeader, Tag, Button, Progress } from 'antd';
 import {
   CheckCircleOutlined,
@@ -20,12 +20,20 @@ import store from "../../redux/store"
 interface TabProps {
   value?: string;
   children?: React.ReactNode; // 自己定义children的类型
-  key?: string
+  key: string
   title?: string
   color?:string
 }
+interface TagObj{
+  title:string
+  color:string
+}
+// interface K{
+//   key?:string
+// }
 
-export default function tab({ value = "", title, children }: TabProps) {
+
+const  tab:FC<TabProps>=({ value , title, children }):ReactElement =>{
   const { Header, Content, Sider } = Layout;
   const { SubMenu } = Menu
   // useEffect(() => {
@@ -41,21 +49,38 @@ export default function tab({ value = "", title, children }: TabProps) {
   const toggle = (): void => {
     collapsed ? setCollapsed(false) : setCollapsed(true)
   };
-  const fn = ({ key = "" }: TabProps) => {
-    console.log(key.indexOf(","))
-
-    // tagList.forEach(element => {
-      
-    // });
+  const fn= ({key}:TabProps):void=> {
+    console.log(key?.indexOf(","))
+    let tag:string
+    let tagObj:TagObj
     if(key.indexOf(",")<0){
       console.log(key)
+      tag=key
     }else{
      console.log( key.slice(key.indexOf(",")+1))
+     tag=key.slice(key.indexOf(",")+1)
     }
+    tagList.forEach(({title}:TabProps,index:number) => {
+       if(title==tag){
+          tagList[index].color="#3b5999"
+       }else{
+        tagList[index].color="default"
+        tagObj.title=tag
+        tagObj.color="default"
+        // tagList.push()
+        tagList.push(tagObj)
+       }
+       setTagList([...tagList])
+
+    });
+
+    
+
     var arr = [];
     arr = key.split(',')
     localStorage.setItem('store', JSON.stringify(arr))
     setRouterArr(arr)
+
 
     // console.log()
 
@@ -63,7 +88,7 @@ export default function tab({ value = "", title, children }: TabProps) {
     // store.dispatch(createBreadAction(routerArr))
     // console.log(store.getState())
   }
-  const getChange = (e: object) => {
+  const getChange = (e: object):void => {
     // console.log(routerArr)
     // console.log(e)
     // routerArr.push(e[0])
@@ -77,7 +102,7 @@ export default function tab({ value = "", title, children }: TabProps) {
         collapsed={collapsed}>
         <div className="logo" />
         <div>
-          <h1>sdflskdjls</h1>
+          <h1 style={{color:"#fff"}}>管理系统</h1>
         </div>
         <Menu theme="dark" mode="inline" onSelect={fn}
           onOpenChange={getChange}
@@ -85,7 +110,7 @@ export default function tab({ value = "", title, children }: TabProps) {
           defaultSelectedKeys={[String(routerArr)]}>
 
           {
-            RouteList.map((item, index) => {
+            RouteList.map((item, index):ReactElement => {
               if (item.children instanceof Array) {
                 return (
                   <SubMenu key={item.key} icon={item.icon ? item.icon : ''} title={item.title}>
@@ -148,7 +173,7 @@ export default function tab({ value = "", title, children }: TabProps) {
               </Tag> */}
               {/* color="#3b5999" */}
               {
-                tagList.map(({title}:TabProps,{color}:TabProps, index: string) => {
+                tagList.map(({title}:TabProps,{color}:TabProps, index: string):ReactElement => {
                   return <Tag className='hover' closable key={index} icon={<ClockCircleOutlined />} color={color}>
                     {title}
                   </Tag>
@@ -172,3 +197,4 @@ export default function tab({ value = "", title, children }: TabProps) {
     </Layout>
   )
 }
+export default tab
