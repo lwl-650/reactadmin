@@ -20,9 +20,12 @@ import store from "../../redux/store"
 interface TabProps {
   value?: string;
   children?: React.ReactNode; // 自己定义children的类型
-  key: string
+  
   title?: string
   color?:string
+}
+interface Ak{
+  key: string
 }
 interface TagObj{
   title:string
@@ -49,7 +52,7 @@ const  tab:FC<TabProps>=({ value , title, children }):ReactElement =>{
   const toggle = (): void => {
     collapsed ? setCollapsed(false) : setCollapsed(true)
   };
-  const fn= ({key}:TabProps):void=> {
+  const fn= ({key}:Ak):void=> {
     console.log(key?.indexOf(","))
     let tag:string
     let tagObj:TagObj
