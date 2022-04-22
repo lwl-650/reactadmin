@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component,FC, ReactElement } from 'react'
+import React, { useState, useEffect, Component, FC, ReactElement } from 'react'
 import { Layout, Menu, Breadcrumb, PageHeader, Tag, Button, Progress } from 'antd';
 import {
   CheckCircleOutlined,
@@ -20,28 +20,27 @@ import store from "../../redux/store"
 interface TabProps {
   value?: string;
   children?: React.ReactNode; // 自己定义children的类型
-  
   title?: string
-  color?:string
+  color?: string
 }
-interface Ak{
+interface Ak {
   key: string
 }
-interface TagObj{
-  title:string
-  color:string
+interface TagObj {
+  title?: string
+  color?: string
 }
 // interface K{
 //   key?:string
 // }
 
 
-const  tab:FC<TabProps>=({ value , title, children }):ReactElement =>{
+const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
   const { Header, Content, Sider } = Layout;
   const { SubMenu } = Menu
   // useEffect(() => {
   //   console.log(11)
-  // },collapsed);给i他
+  // },collapsed);
 
 
   const [collapsed, setCollapsed] = useState(false)
@@ -52,46 +51,41 @@ const  tab:FC<TabProps>=({ value , title, children }):ReactElement =>{
   const toggle = (): void => {
     collapsed ? setCollapsed(false) : setCollapsed(true)
   };
-  const fn= ({key}:Ak):void=> {
-    console.log(key?.indexOf(","))
-    let tag:string
-    let tagObj:TagObj
-    if(key.indexOf(",")<0){
+  const fn = ({ key }: Ak): void => {
+    let tag: string
+    let tagObj: TagObj={}
+
+    if (key.indexOf(",") < 0) {
       console.log(key)
-      tag=key
-    }else{
-     console.log( key.slice(key.indexOf(",")+1))
-     tag=key.slice(key.indexOf(",")+1)
+      tag = key
+    } else {
+      console.log(key.slice(key.indexOf(",") + 1))
+      tag = key.slice(key.indexOf(",") + 1)
     }
-    tagList.forEach(({title}:TabProps,index:number) => {
-       if(title==tag){
-          tagList[index].color="#3b5999"
-       }else{
-        tagList[index].color="default"
-        tagObj.title=tag
-        tagObj.color="default"
-        // tagList.push()
+
+    tagList.forEach(({ title }: TabProps, index: number) => {
+      if (title == tag) {
+        tagList[index].color = "#3b5999"
+      } else {
+        tagList[index].color = "default"      
+        tagObj.title = tag
+        tagObj.color = "default"
         tagList.push(tagObj)
-       }
-       setTagList([...tagList])
+      }
+      setTagList([...tagList])
 
     });
-
-    
-
     var arr = [];
     arr = key.split(',')
     localStorage.setItem('store', JSON.stringify(arr))
     setRouterArr(arr)
 
-
-    // console.log()
-
-    // console.log(routerArr)
+    console.log(routerArr)
+    console.log("🐱‍🏍 => file: tab.tsx => line 92 => fn => routerArr", routerArr)
     // store.dispatch(createBreadAction(routerArr))
     // console.log(store.getState())
   }
-  const getChange = (e: object):void => {
+  const getChange = (e: object): void => {
     // console.log(routerArr)
     // console.log(e)
     // routerArr.push(e[0])
@@ -105,7 +99,7 @@ const  tab:FC<TabProps>=({ value , title, children }):ReactElement =>{
         collapsed={collapsed}>
         <div className="logo" />
         <div>
-          <h1 style={{color:"#fff"}}>管理系统</h1>
+          <h1 style={{ color: "#fff" }}>管理系统</h1>
         </div>
         <Menu theme="dark" mode="inline" onSelect={fn}
           onOpenChange={getChange}
@@ -113,7 +107,7 @@ const  tab:FC<TabProps>=({ value , title, children }):ReactElement =>{
           defaultSelectedKeys={[String(routerArr)]}>
 
           {
-            RouteList.map((item, index):ReactElement => {
+            RouteList.map((item, index): ReactElement => {
               if (item.children instanceof Array) {
                 return (
                   <SubMenu key={item.key} icon={item.icon ? item.icon : ''} title={item.title}>
@@ -176,7 +170,7 @@ const  tab:FC<TabProps>=({ value , title, children }):ReactElement =>{
               </Tag> */}
               {/* color="#3b5999" */}
               {
-                tagList.map(({title}:TabProps,{color}:TabProps, index: string):ReactElement => {
+                tagList.map(({ title }: TabProps, { color }: TabProps, index: string): ReactElement => {
                   return <Tag className='hover' closable key={index} icon={<ClockCircleOutlined />} color={color}>
                     {title}
                   </Tag>

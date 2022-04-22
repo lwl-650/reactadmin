@@ -16,7 +16,7 @@ const RouterIndex = () => {
 
         <Router>
             <Tab title="啦啦啦">
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<h1>Loading...</h1>}>
                     <Routes>
 
                         {/* <Route path="/" element={<Index />}></Route> */}
