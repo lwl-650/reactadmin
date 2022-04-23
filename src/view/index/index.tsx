@@ -7,7 +7,7 @@ import {
 } from "react";
 
 import "./index.scss";
-import { findId, findAll } from "../../http/api";
+import { findId, findAll,delById ,addUser} from "../../http/api";
 import {
   Table,
   Button,
@@ -40,10 +40,10 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
   const [valueS, setValueS] = useState("")
   const [pagination, setPagination] = useState({
     current: 1,
-    pageSize: 10,
+    pageSize: 6,
   })
   const [loading, setloading] = useState(false)
-
+  const [page, setpage] = useState(1)
 
   useEffect(() => {
     getList();
@@ -52,18 +52,27 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
   const showDrawer = ({ name, gender }: IndexProps) => {
     setVisible(true);
     setFields([
-      { name: ["username"], value: name },
+      { name: ["name"], value: name },
       { name: ["password"], value: gender },
     ]);
   };
 
+ 
   const onClose = () => {
     //..
     setVisible(false);
   };
+  
   const onFinish = (values: any) => {
     //..
     console.log("Success:", values);
+    addUser(values).then((res:any)=>{
+      if(res.code==200){
+        setVisible(false);
+        message.success("添加"+res.msg, 1)
+        getList()
+      }
+    })
   };
   const onFinishFailed = (errorInfo: any) => {
     //..
@@ -72,13 +81,21 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
   const confirm = (e: Event): void => {
     //..
     console.log("🐱‍🏍 => file: index.tsx => line 19 => confirm => e", e);
-    message.success("Click on Yes", 1);
+   ;
+    delById({id:e}).then((res:any)=>{
+      message.success("删除"+res.msg, 1)
+      getList()
+    })
   };
 
   const showEdit = (type: any) => {
-    //..
     setVisible(true);
     console.log(type);
+    setFields([
+      { name: ["name"], value: "" },
+      { name: ["password"], value: "" },
+    ]);
+   
     console.log("🐱‍🏍 => file: index.tsx => line 51 => showEdit => type", type);
   };
   const onSelectChange = (selectedRowKeys: any) => {
@@ -105,19 +122,20 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
 
 
   const getList = () => {
-    // findAll().then((res: any) => {
-    //   console.log(res.data)
-    //   setData(res.data)
-    // })
-    const data = [];
-    for (let i = 0; i < 100; i++) {
-      data.push({
-        id: i,
-        name: `Edward King ${i}`,
-        gender: `London, Park Lane no. ${i}`,
-      });
-    }
-    setData([...data])
+
+    findAll({page:page}).then((res: any) => {
+      console.log(res.data)
+      setData(res.data)
+    })
+    // const data = [];
+    // for (let i = 0; i < 100; i++) {
+    //   data.push({
+    //     id: i,
+    //     name: `Edward King ${i}`,
+    //     gender: `London, Park Lane no. ${i}`,
+    //   });
+    // }
+    // setData([...data])
     // setData([
     //   {
     //     id: 1,
@@ -142,25 +160,29 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
   const fetch = (params: any) => {
     setloading(true)
 
-    const data = [];
-    for (let i = 0; i < 100; i++) {
-      data.push({
-        id: i,
-        name: `Edward King ${i}`,
-        gender: `London, Park Lane no. ${i}`,
-      });
-    }
+    findAll({page:page,num:6}).then((res: any) => {
+      console.log(res.data)
+      // setData(res.data)
+    })
+    console.log(page)
+  //  let pages:number= page++
+    // setpage(pages)
     setData([...data])
     setloading(false)
     setPagination({
       ...params.pagination,
-      total: 100,
+      total: 20,
       // 200 is mock data, you should read it from server
       // total: data.totalCount,
     })
   };
 
   const columns = [
+    {
+      title: "Id",
+      dataIndex: "id",
+      tags: ["nice", "developer"],
+    },
     {
       title: "Name",
       dataIndex: "name",
@@ -251,12 +273,11 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
           <Form.Item
             labelAlign="left"
             label="Username"
-            name="username"
+            name="name"
             rules={[{ required: true, message: "Please input your username!" }]}
           >
             <Input style={{ marginLeft: "-60px" }} />
           </Form.Item>
-
           <Form.Item
             label="Password"
             name="password"
@@ -264,6 +285,31 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
           >
             <Input.Password style={{ marginLeft: "-60px" }} />
           </Form.Item>
+          <Form.Item
+            labelAlign="left"
+            label="Avatar"
+            name="avatar"
+            rules={[{ required: true, message: "Please input your username!" }]}
+          >
+            <Input style={{ marginLeft: "-60px" }} />
+          </Form.Item>
+          <Form.Item
+            labelAlign="left"
+            label="Gender"
+            name="gender"
+            rules={[{ required: true, message: "Please input your username!" }]}
+          >
+            <Input style={{ marginLeft: "-60px" }} />
+          </Form.Item>
+          <Form.Item
+            labelAlign="left"
+            label="City"
+            name="city"
+            rules={[{ required: true, message: "Please input your username!" }]}
+          >
+            <Input style={{ marginLeft: "-60px" }} />
+          </Form.Item>
+          
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
