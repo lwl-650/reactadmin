@@ -1,22 +1,26 @@
-import { Component } from 'react';
-// import { browserHistory } from 'react-router'
- 
- 
-class Login extends Component {
-    handleSubmit = ( e:any) => {
-        // this.props.history.push({pathname:'/app'});
-    };
- 
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-			  <input type="text" placeholder="userName"/>
-			  <input type="text" placeholder="repo"/>
-			  <button type="submit">Go</button>
-			</form>
-        );
-    }
+import React from 'react'
+import { useNavigate } from "react-router-dom";
+export default function Login() {
+
+    localStorage.setItem("iflogin","false")
+    const navigate = useNavigate();
+const go =()=>{
+    navigate("/world")
 }
+
+    return (
+        <>
+         <input type="text" placeholder="userName"/>
+          <input type="text" placeholder="repo"/>
+          <button type="submit" onClick={go}>Go</button>
+         
+        </>
+         
+      
+    )
+}
+
+
+
  
  
-export default Login;

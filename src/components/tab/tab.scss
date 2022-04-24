@@ -21,6 +21,7 @@
     display: flex;
     align-items: center;
     padding-left: .25rem !important;
+    position: relative;
 }
 
 .tagList {
@@ -46,4 +47,16 @@
 
   .hover{
     cursor:pointer
+}
+.show-avatar{
+    width: 45px;
+}
+.avatar{
+    position: absolute;
+    right: 20px;
+    
+}
+
+.sign{
+    text-align: center;
 }

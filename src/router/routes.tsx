@@ -16,10 +16,6 @@ export const mainRoutes = [
         element: <Index />
     },
     {
-        path: "/login",
-        element: <Login />
-    },
-    {
         path: "/*",
         element: <Err />
     },
@@ -29,7 +25,8 @@ export const mainRoutes = [
     }, {
         path: '/world/a',
         element: <A />
-    }
+    },
+   
 ]
 
 export const adminRoutes = [

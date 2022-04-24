@@ -1,10 +1,14 @@
 import React, { useState, useEffect, Component, FC, ReactElement } from 'react'
-import { Layout, Menu, Breadcrumb, PageHeader, Tag, Button, Progress } from 'antd';
+import {
+  Layout, Menu, Breadcrumb, PageHeader,
+  Popover,
+  Tag, Button, Avatar
+} from 'antd';
 import {
   CheckCircleOutlined,
   SyncOutlined,
   CloseCircleOutlined,
-  ExclamationCircleOutlined,
+  PoweroffOutlined,
   ClockCircleOutlined,
   MinusCircleOutlined,
   MenuFoldOutlined,
@@ -42,18 +46,26 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
   //   console.log(11)
   // },collapsed);
 
-
   const [collapsed, setCollapsed] = useState(false)
   const [routerArr, setRouterArr] = useState(JSON.parse(localStorage.getItem("store") || '["首页"]'))
   const [tagList, setTagList] = useState(JSON.parse(localStorage.getItem("tagList") || '[{"title":"首页","color":"default"}]'))
+  const [loading,setLoading]=useState(false)
 
+  const sign=():void=>{
+    let timer
+    clearTimeout(timer)
+    setLoading(true)
+    timer= setTimeout(()=>{
+        setLoading(false)
+  },1500)
 
+  }
   const toggle = (): void => {
     collapsed ? setCollapsed(false) : setCollapsed(true)
   };
   const fn = ({ key }: Ak): void => {
     let tag: string
-    let tagObj: TagObj={}
+    let tagObj: TagObj = {}
 
     if (key.indexOf(",") < 0) {
       console.log(key)
@@ -67,7 +79,7 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
       if (title == tag) {
         tagList[index].color = "#3b5999"
       } else {
-        tagList[index].color = "default"      
+        tagList[index].color = "default"
         tagObj.title = tag
         tagObj.color = "default"
         tagList.push(tagObj)
@@ -92,6 +104,25 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
     // console.log(routerArr)
   }
 
+  const enterLoading = (index: any) => {
+
+  }
+
+  const content = (
+    <div className='sign'>
+      <p>Content</p>
+      <p>Content</p>
+      {/* <Button type="text" loading={true}>Text</Button> */}
+      <Button
+        type="primary"
+        icon={<PoweroffOutlined />}
+        loading={loading}
+        onClick={sign}
+      >
+        Click me!
+      </Button>
+    </div>
+  );
 
   return (
     <Layout>
@@ -138,37 +169,16 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
           <Button onClick={toggle}
           >{React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}</Button>
           <div className="tagList">
-            {/* <PageHeader
-            className="site-page-header"
-            breadcrumb={{ routes }}
-            onBack={onBacks}
-          /> */}
             <Breadcrumb>
               {
                 routerArr.map((item: string, index: string) => {
                   return <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>
                 })
               }
-              {/* <Breadcrumb.Item>
-                index
-              </Breadcrumb.Item>
-              <Breadcrumb.Item>List</Breadcrumb.Item> */}
-              {/* <Breadcrumb.Item>App</Breadcrumb.Item> */}
+
             </Breadcrumb>
             <div className="tag">
-              {/* <Tag closable icon={<CheckCircleOutlined />} color="success">
-                success
-              </Tag>
-              <Tag icon={<SyncOutlined spin />} color="processing">
-                processing
-              </Tag>
-              <Tag icon={<CloseCircleOutlined />} color="error">
-                error
-              </Tag>
-              <Tag icon={<ExclamationCircleOutlined />} color="warning">
-                warning
-              </Tag> */}
-              {/* color="#3b5999" */}
+
               {
                 tagList.map(({ title }: TabProps, { color }: TabProps, index: string): ReactElement => {
                   return <Tag className='hover' closable key={index} icon={<ClockCircleOutlined />} color={color}>
@@ -176,13 +186,19 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
                   </Tag>
                 })
               }
-              {/* <Tag closable icon={<ClockCircleOutlined />} color="#3b5999">
-                waiting
-              </Tag>
-              <Tag icon={<MinusCircleOutlined />} color="default">
-                stop
-              </Tag> */}
+
             </div>
+          </div>
+
+          <div className="avatar">
+
+            <Popover placement="topLeft" title="Title" content={content} >
+              <div className="show-avatar">
+                <Avatar src="https://joeschmoe.io/api/v1/random" size={40}>
+
+                </Avatar>
+              </div>
+            </Popover>
           </div>
         </Header>
 
@@ -190,7 +206,9 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
           {/* {props.children} */}
           {children}
         </Content>
+
       </Layout>
+
     </Layout>
   )
 }

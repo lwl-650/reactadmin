@@ -7,7 +7,7 @@ import {
 } from "react";
 
 import "./index.scss";
-import { findId, findAll,delById ,addUser} from "../../http/api";
+import { findId, findAll, delById, addUser } from "../../http/api";
 import {
   Table,
   Button,
@@ -17,23 +17,28 @@ import {
   message,
   Drawer,
   Form,
-  Input
+  Input,
+  Radio
 } from "antd";
 const { Search } = Input;
 interface IndexProps {
   // onClick ?:event: MouseEvent<HTMLDivElement>||undefined,
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
+  name?: string | number | (string | number)[];
+  gender?: string;
+  fields?: FieldData[];
+}
+
+interface FieldData {
   name: string | number | (string | number)[];
-  value?: any
+  value?: any;
   touched?: boolean;
   validating?: boolean;
   errors?: string[];
-  gender?: string;
-
 }
 
-const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
-  const [fields, setFields] = useState<IndexProps[]>([]);
+const Index: FC<IndexProps> = ({ onClick }): ReactElement => {
+  const [fields, setFields] = useState<FieldData[]>([]);
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -57,33 +62,34 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
     ]);
   };
 
- 
+
   const onClose = () => {
-    //..
+
     setVisible(false);
   };
-  
+
   const onFinish = (values: any) => {
-    //..
+
     console.log("Success:", values);
-    addUser(values).then((res:any)=>{
-      if(res.code==200){
+    addUser(values).then((res: any) => {
+      console.log("🐱‍🏍 => file: index.tsx => line 70 => addUser => res", res)
+
+      if (res.code == 200) {
         setVisible(false);
-        message.success("添加"+res.msg, 1)
+        message.success("添加" + res.msg, 1)
         getList()
       }
     })
   };
   const onFinishFailed = (errorInfo: any) => {
-    //..
+
     console.log("Failed:", errorInfo);
   };
   const confirm = (e: Event): void => {
-    //..
+
     console.log("🐱‍🏍 => file: index.tsx => line 19 => confirm => e", e);
-   ;
-    delById({id:e}).then((res:any)=>{
-      message.success("删除"+res.msg, 1)
+    delById({ id: e }).then((res: any) => {
+      message.success("删除" + res.msg, 1)
       getList()
     })
   };
@@ -95,7 +101,7 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
       { name: ["name"], value: "" },
       { name: ["password"], value: "" },
     ]);
-   
+
     console.log("🐱‍🏍 => file: index.tsx => line 51 => showEdit => type", type);
   };
   const onSelectChange = (selectedRowKeys: any) => {
@@ -123,7 +129,7 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
 
   const getList = () => {
 
-    findAll({page:page}).then((res: any) => {
+    findAll({ page: page }).then((res: any) => {
       console.log(res.data)
       setData(res.data)
     })
@@ -160,12 +166,12 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
   const fetch = (params: any) => {
     setloading(true)
 
-    findAll({page:page,num:6}).then((res: any) => {
+    findAll({ page: page, num: 6 }).then((res: any) => {
       console.log(res.data)
       // setData(res.data)
     })
     console.log(page)
-  //  let pages:number= page++
+    //  let pages:number= page++
     // setpage(pages)
     setData([...data])
     setloading(false)
@@ -265,7 +271,10 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
           labelCol={{ span: 8 }}
           labelAlign="left"
           wrapperCol={{ span: 16 }}
-          initialValues={{ remember: true }}
+          initialValues={{
+            remember: true,
+            "radio-group": "女"
+          }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
@@ -293,6 +302,14 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
           >
             <Input style={{ marginLeft: "-60px" }} />
           </Form.Item>
+
+          <Form.Item name="radio-group" label="Radio">
+            <Radio.Group style={{ marginLeft: "-60px" }}>
+              <Radio value="女">女</Radio>
+              <Radio value="男">男</Radio>
+            </Radio.Group>
+          </Form.Item>
+
           <Form.Item
             labelAlign="left"
             label="Gender"
@@ -309,7 +326,7 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
           >
             <Input style={{ marginLeft: "-60px" }} />
           </Form.Item>
-          
+
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
