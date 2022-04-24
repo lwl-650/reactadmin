@@ -10,29 +10,21 @@ import { Suspense } from 'react'
 import { mainRoutes } from "./routes"
 import Tab from "../components/tab/tab"
 import Login from "../view/login/login";
-import World from "../view/world/world"
+import NweIndex from "../view/newIndex/newIndex"
 const RouterIndex = () => {
 
 
     return (
 
         <Router>
+            <Routes>
+             <Route path="/login" element={<Login />}></Route>
+             <Route path="/" element={<NweIndex />}></Route>
+            </Routes>
+            
+            
 
-            <Tab title="啦啦啦">
-                <Suspense fallback={<h1>Loading...</h1>}>
-                    <Routes>
-                        {/* <Route path="/" element={<Index />}></Route> */}
-                        {
-                            mainRoutes.map(route => {
-                                return <Route {...route} key={route.path}></Route>
-                            })
-                        }
-                        {/* <Route path="/*" element={<Navigate to="/err" />} /> */}
-                        {/* <Route path="/" element={<Index />}></Route>
-                         <Route path="/*" element={<Err />}></Route> */}
-                    </Routes>
-                </Suspense>
-            </Tab>
+            
 
 
 
