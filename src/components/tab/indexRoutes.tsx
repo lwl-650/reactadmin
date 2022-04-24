@@ -2,6 +2,10 @@
 import {
   SmileOutlined,
   HomeOutlined,
+  CheckCircleOutlined,
+  SyncOutlined,
+  CloseCircleOutlined,
+  MinusCircleOutlined,
 } from '@ant-design/icons';
 
 const RouteList: any[] = [
@@ -15,21 +19,21 @@ const RouteList: any[] = [
   {
     title: '列表一',
     key:'列表一',
-    icon: <HomeOutlined />,
+    icon: <CheckCircleOutlined />,
     isVisible: true,
     path: '/world',
     children: [
       {
-        title: 'world管理',
-        key:'列表一,world管理',
-        icon: <SmileOutlined />,
+        title: '分析',
+        key:'列表一,分析',
+        icon: <MinusCircleOutlined />,
         isVisible: true,
         path: '/world',
       },
       {
-        title: 'xx管理',
-        key:'列表一,xx管理',
-        icon: <SmileOutlined />,
+        title: '信息',
+        key:'列表一,信息',
+        icon: <SyncOutlined />,
         isVisible: true,
         path: '/world/a',
       }
@@ -38,20 +42,20 @@ const RouteList: any[] = [
   {
     title: '列表二',
     key: '列表二',
-    icon: <HomeOutlined />,
+    icon: <CloseCircleOutlined />,
     isVisible: true,
     path: '/world',
     children: [
       {
-        title: 'world管理1',
-        key: '列表二,world管理1',
+        title: '管理',
+        key: '列表二,管理',
         icon: <SmileOutlined />,
         isVisible: true,
         path: '/world',
       },
       {
-        title: 'xx管理2',
-        key: '列表二,xx管理2',
+        title: '设置',
+        key: '列表二,设置',
         icon: <SmileOutlined />,
         isVisible: true,
         path: '/world/a',

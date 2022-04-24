@@ -5,12 +5,9 @@ import {
   Tag, Button, Avatar
 } from 'antd';
 import {
-  CheckCircleOutlined,
-  SyncOutlined,
-  CloseCircleOutlined,
+ 
   PoweroffOutlined,
   ClockCircleOutlined,
-  MinusCircleOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined
 } from '@ant-design/icons';
@@ -48,54 +45,57 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
 
   const [collapsed, setCollapsed] = useState(false)
   const [routerArr, setRouterArr] = useState(JSON.parse(localStorage.getItem("store") || '["首页"]'))
-  const [tagList, setTagList] = useState(JSON.parse(localStorage.getItem("tagList") || '[{"title":"首页","color":"default"}]'))
-  const [loading,setLoading]=useState(false)
+  const [tagArr, setTagArr] = useState(JSON.parse(localStorage.getItem("tagArr") || '["首页"]'))
+  const [tagList, setTagList] = useState(JSON.parse(localStorage.getItem("tagList") || '[{"title":"首页","color":"#3b5999"}]'))
+  const [loading, setLoading] = useState(false)
 
-  const sign=():void=>{
+  const sign = (): void => {
     let timer
     clearTimeout(timer)
     setLoading(true)
-    timer= setTimeout(()=>{
-        setLoading(false)
-  },1500)
+    timer = setTimeout(() => {
+      setLoading(false)
+    }, 1500)
 
   }
   const toggle = (): void => {
     collapsed ? setCollapsed(false) : setCollapsed(true)
-  };
+  }
   const fn = ({ key }: Ak): void => {
     let tag: string
     let tagObj: TagObj = {}
 
     if (key.indexOf(",") < 0) {
-      console.log(key)
       tag = key
     } else {
-      console.log(key.slice(key.indexOf(",") + 1))
       tag = key.slice(key.indexOf(",") + 1)
     }
 
-    tagList.forEach(({ title }: TabProps, index: number) => {
-      if (title == tag) {
-        tagList[index].color = "#3b5999"
-      } else {
-        tagList[index].color = "default"
-        tagObj.title = tag
-        tagObj.color = "default"
-        tagList.push(tagObj)
-      }
-      setTagList([...tagList])
 
-    });
+    if (tagArr.indexOf(tag) == -1) {
+      tagArr.push(tag)
+      tagObj.color = "#3b5999"
+      tagObj.title = tag
+      tagList.forEach((item:any) => {
+        item.color="default"
+      });
+      tagList.push(tagObj)
+      setTagList([...tagList])
+    }
+
+    console.log("🐱‍🏍 => file: tab.tsx => line 79 => fn => tagArr", tagArr)
+    localStorage.setItem('tagArr', JSON.stringify(tagArr))
+    console.log("🐱‍🏍 => file: tab.tsx => line 90 => fn => tagList", tagList)
+    localStorage.setItem('tagList', JSON.stringify(tagList))
+    
+
+
+
     var arr = [];
     arr = key.split(',')
     localStorage.setItem('store', JSON.stringify(arr))
     setRouterArr(arr)
-
-    console.log(routerArr)
     console.log("🐱‍🏍 => file: tab.tsx => line 92 => fn => routerArr", routerArr)
-    // store.dispatch(createBreadAction(routerArr))
-    // console.log(store.getState())
   }
   const getChange = (e: object): void => {
     // console.log(routerArr)
@@ -119,7 +119,7 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
         loading={loading}
         onClick={sign}
       >
-        Click me!
+        退出登录！
       </Button>
     </div>
   );
@@ -180,8 +180,8 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
             <div className="tag">
 
               {
-                tagList.map(({ title }: TabProps, { color }: TabProps, index: string): ReactElement => {
-                  return <Tag className='hover' closable key={index} icon={<ClockCircleOutlined />} color={color}>
+                tagList.map(({ title, color }: TabProps, index: string): ReactElement => {
+                  return <Tag className='hover' closable key={title} icon={<ClockCircleOutlined />} color={color}>
                     {title}
                   </Tag>
                 })

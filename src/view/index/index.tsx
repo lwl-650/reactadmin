@@ -51,8 +51,16 @@ const Index: FC<IndexProps> = ({ onClick }): ReactElement => {
   const [page, setpage] = useState(1)
 
   useEffect(() => {
-    getList();
+    getList()
+    return componentWillUnmount;
   }, []);
+  function componentWillUnmount() {
+    // 组件销毁时你要执行的代码
+    getList()
+    setData([])
+    // alert('组件销毁？')
+  }
+
 
   const showDrawer = ({ name, gender }: IndexProps) => {
     setVisible(true);
