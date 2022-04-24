@@ -17,27 +17,27 @@ import {
   message,
   Drawer,
   Form,
-  Input,
-  Radio
+  Input
 } from "antd";
 const { Search } = Input;
 interface IndexProps {
   // onClick ?:event: MouseEvent<HTMLDivElement>||undefined,
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
-  name?: string | number | (string | number)[];
-  gender?: string;
   fields?: FieldData[];
-}
+ 
 
+}
 interface FieldData {
   name: string | number | (string | number)[];
   value?: any;
   touched?: boolean;
   validating?: boolean;
   errors?: string[];
+  gender?: string;
 }
 
-const Index: FC<IndexProps> = ({ onClick }): ReactElement => {
+
+const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
   const [fields, setFields] = useState<FieldData[]>([]);
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState([]);
@@ -51,18 +51,10 @@ const Index: FC<IndexProps> = ({ onClick }): ReactElement => {
   const [page, setpage] = useState(1)
 
   useEffect(() => {
-    getList()
-    return componentWillUnmount;
+    getList();
   }, []);
-  function componentWillUnmount() {
-    // 组件销毁时你要执行的代码
-    getList()
-    setData([])
-    // alert('组件销毁？')
-  }
 
-
-  const showDrawer = ({ name, gender }: IndexProps) => {
+  const showDrawer = ({ name, gender }: FieldData) => {
     setVisible(true);
     setFields([
       { name: ["name"], value: name },
@@ -72,16 +64,14 @@ const Index: FC<IndexProps> = ({ onClick }): ReactElement => {
 
 
   const onClose = () => {
-
+    //..
     setVisible(false);
   };
 
   const onFinish = (values: any) => {
-
+    //..
     console.log("Success:", values);
     addUser(values).then((res: any) => {
-      console.log("🐱‍🏍 => file: index.tsx => line 70 => addUser => res", res)
-
       if (res.code == 200) {
         setVisible(false);
         message.success("添加" + res.msg, 1)
@@ -90,12 +80,13 @@ const Index: FC<IndexProps> = ({ onClick }): ReactElement => {
     })
   };
   const onFinishFailed = (errorInfo: any) => {
-
+    //..
     console.log("Failed:", errorInfo);
   };
   const confirm = (e: Event): void => {
-
+    //..
     console.log("🐱‍🏍 => file: index.tsx => line 19 => confirm => e", e);
+    ;
     delById({ id: e }).then((res: any) => {
       message.success("删除" + res.msg, 1)
       getList()
@@ -279,10 +270,7 @@ const Index: FC<IndexProps> = ({ onClick }): ReactElement => {
           labelCol={{ span: 8 }}
           labelAlign="left"
           wrapperCol={{ span: 16 }}
-          initialValues={{
-            remember: true,
-            "radio-group": "女"
-          }}
+          initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
@@ -310,14 +298,6 @@ const Index: FC<IndexProps> = ({ onClick }): ReactElement => {
           >
             <Input style={{ marginLeft: "-60px" }} />
           </Form.Item>
-
-          <Form.Item name="radio-group" label="Radio">
-            <Radio.Group style={{ marginLeft: "-60px" }}>
-              <Radio value="女">女</Radio>
-              <Radio value="男">男</Radio>
-            </Radio.Group>
-          </Form.Item>
-
           <Form.Item
             labelAlign="left"
             label="Gender"
