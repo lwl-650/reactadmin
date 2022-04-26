@@ -1,5 +1,21 @@
 import * as React from 'react';
-import { useNavigate } from "react-router-dom";
+import {
+   BrowserRouter as Router,
+   Route,
+   Routes,
+   Navigate,
+   useNavigate,
+   Link,
+   Outlet
+} from 'react-router-dom'
+
+const WorldIndex = React.lazy(() => import('./worldIndex/worldIndex'))
+const Xx = React.lazy(() => import('./xx/xx'))
+
+// import  WorldIndex from "./worldIndex/worldIndex"
+// import Xx from "./xx/xx"
+
+
 interface WorldProps {
 }
 
@@ -28,6 +44,16 @@ const World: React.FC<WorldProps> = ({ }): React.ReactElement => {
       <>
          <div>{data.tt}</div>
          <button onClick={get}>15133</button>
+
+         {/* <Routes>
+                    <Route path="" element={<WorldIndex />}></Route>
+                    <Route path="xx" element={<Xx />}></Route>
+                </Routes> */}
+
+
+                <Link to="">WorldIndex</Link>================
+                <Link to="xx">xx</Link>
+                <Outlet/>
       </>
    )
 

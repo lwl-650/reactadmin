@@ -12,7 +12,7 @@ import {
   MenuUnfoldOutlined
 } from '@ant-design/icons';
 import "./tab.scss"
-import { Link } from 'react-router-dom';
+import { Link ,Navigate} from 'react-router-dom';
 import RouteList from './indexRoutes'
 import { createBreadAction } from "../../redux/bread_action"
 import store from "../../redux/store"
@@ -203,7 +203,6 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
         </Header>
 
         <Content style={{ backgroundColor: "#ffffff" }}>
-          {/* {props.children} */}
           {children}
         </Content>
 

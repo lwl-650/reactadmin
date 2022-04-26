@@ -10,10 +10,13 @@ const World = lazy(() => import("../view/world/world"))
 const Err = lazy(() => import("../view/err/err"))
 const A = lazy(() => import('../view/world/a/a'))
 const Index = lazy(() => import('../view/index/index'))
+const Xx =lazy(() => import('../view/world/xx/xx'))
+const WorldIndex =lazy(() => import('../view/world/worldIndex/worldIndex'))
 export const mainRoutes = [
     {
         path: "/",
-        element: <Index />
+        element: <Index />,
+
     },
     {
         path: "/*",
@@ -21,12 +24,28 @@ export const mainRoutes = [
     },
     {
         path: '/world',
-        element: <World />
+        element: <World />,
+        mate: true,
+        childen: [
+            {
+                path: "",
+                element: <WorldIndex />
+            },
+            {
+                path: "xx",
+                element: <Xx />
+            }
+        ],
+        
     }, {
         path: '/world/a',
         element: <A />
     },
-   
+    {
+        path: '/login',
+        element: <Login />
+    },
+
 ]
 
 export const adminRoutes = [

@@ -10,35 +10,62 @@ import { Suspense } from 'react'
 import { mainRoutes } from "./routes"
 import Tab from "../components/tab/tab"
 import Login from "../view/login/login";
+import PrivateRoute from "./PrivateRoute"
+import Index from "../view/index/index"
+import Err from "../view/err/err"
+
+
+
+interface Router{
+    path?:string
+    mate?:boolean
+    element?:React.ReactNode
+    childen?:Array<Router>
+}
 
 const RouterIndex = () => {
 
-
     return (
-
         <Router>
-           <Tab title="啦啦啦">
-                <Suspense fallback={<h1>Loading...</h1>}>
-                    <Routes>
-                        {/* <Route path="/" element={<Index />}></Route> */}
-                        {
-                            mainRoutes.map(route => {
-                                return <Route {...route} key={route.path}></Route>
-                            })
-                        }
-                        {/* <Route path="/*" element={<Navigate to="/err" />} /> */}
-                        {/* <Route path="/" element={<Index />}></Route>
-                         <Route path="/*" element={<Err />}></Route> */}
-                    </Routes>
-                </Suspense>
-            </Tab>
-
-        </Router >
-
-
-
+            <Routes>
+                {getRoute(mainRoutes)}
+            </Routes>
+        </Router>
 
     )
+}
+
+const getRoute = (mainRoutes: Array<Router>) => {
+    return mainRoutes.map((route: Router) => {
+
+        if (route.path == "/login") {
+            return <Route path={route.path} element={
+                <PrivateRoute>
+                    {route.element}
+                </PrivateRoute>
+            } key={route.path}>
+
+            </Route>
+        }
+        return <Route path={route.path} element={
+            <PrivateRoute mate={route.mate}>
+                <Tab>
+                    <Suspense fallback={<h1>Loading...</h1>}>
+                        {route.element}
+                    </Suspense>
+                </Tab>
+            </PrivateRoute>}
+            key={route.path}>
+            {route.childen ? nesting(route.childen) : null}
+        </Route>
+    })
+}
+
+const nesting = (come: Array<Router>) => {
+
+    return come.map((item: Router) => {
+        return <Route {...item} key={item.path}></Route>
+    })
 }
 export default RouterIndex
 
