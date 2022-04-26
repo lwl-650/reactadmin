@@ -1,8 +1,6 @@
 
 import { lazy } from "react"
 
-
-
 import Login from "../view/login/login";
 // import A from "../view/world/a/a"
 
@@ -10,23 +8,19 @@ const World = lazy(() => import("../view/world/world"))
 const Err = lazy(() => import("../view/err/err"))
 const A = lazy(() => import('../view/world/a/a'))
 const Index = lazy(() => import('../view/index/index'))
-const Xx =lazy(() => import('../view/world/xx/xx'))
-const WorldIndex =lazy(() => import('../view/world/worldIndex/worldIndex'))
-export const mainRoutes = [
-    {
-        path: "/",
-        element: <Index />,
+const Xx = lazy(() => import('../view/world/xx/xx'))
+const WorldIndex = lazy(() => import('../view/world/worldIndex/worldIndex'))
+const Analysis =lazy(() => import('../view/analysis/analysis'))
 
+export const mainRoutes = [
+    { path: "/", element: <Index />, },
+    { path: "/*", element: <Err /> },
+    {
+        path: '/analysis',
+        element: <Analysis />
     },
     {
-        path: "/*",
-        element: <Err />
-    },
-    {
-        path: '/world',
-        element: <World />,
-        mate: true,
-        childen: [
+        path: '/world', element: <World />, mate: true, childen: [
             {
                 path: "",
                 element: <WorldIndex />
@@ -36,8 +30,9 @@ export const mainRoutes = [
                 element: <Xx />
             }
         ],
-        
-    }, {
+
+    },
+     {
         path: '/world/a',
         element: <A />
     },

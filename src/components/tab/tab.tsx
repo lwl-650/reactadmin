@@ -2,7 +2,7 @@ import React, { useState, useEffect, Component, FC, ReactElement } from 'react'
 import {
   Layout, Menu, Breadcrumb, PageHeader,
   Popover,
-  Tag, Button, Avatar
+  Tag, Button, Avatar, message
 } from 'antd';
 import {
  
@@ -12,11 +12,12 @@ import {
   MenuUnfoldOutlined
 } from '@ant-design/icons';
 import "./tab.scss"
-import { Link ,Navigate} from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import RouteList from './indexRoutes'
 import { createBreadAction } from "../../redux/bread_action"
 import store from "../../redux/store"
 
+import navigates from "../../util/navigate"
 
 interface TabProps {
   value?: string;
@@ -31,14 +32,13 @@ interface TagObj {
   title?: string
   color?: string
 }
-// interface K{
-//   key?:string
-// }
+
 
 
 const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
   const { Header, Content, Sider } = Layout;
   const { SubMenu } = Menu
+  const  navigate=useNavigate()
   // useEffect(() => {
   //   console.log(11)
   // },collapsed);
@@ -54,7 +54,10 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
     clearTimeout(timer)
     setLoading(true)
     timer = setTimeout(() => {
+      
       setLoading(false)
+      message.success("退出成功", 1)
+      navigate("/login")
     }, 1500)
 
   }
