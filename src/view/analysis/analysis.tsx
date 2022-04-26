@@ -14,7 +14,7 @@ import {
     Table,
     Button,
     Space,
-    Tag,
+    Radio,
     Popconfirm,
     message,
     Drawer,
@@ -39,7 +39,7 @@ interface FieldData {
 }
 
 
-const Analysis:FC<AnalysisProps>= ({ }): ReactElement =>{
+const Analysis: FC<AnalysisProps> = ({ }): ReactElement => {
 
     const [fields, setFields] = useState<FieldData[]>([]);
     const [visible, setVisible] = useState(false);
@@ -274,7 +274,10 @@ const Analysis:FC<AnalysisProps>= ({ }): ReactElement =>{
                     labelCol={{ span: 8 }}
                     labelAlign="left"
                     wrapperCol={{ span: 16 }}
-                    initialValues={{ remember: true }}
+                    initialValues={{
+                        remember: true,
+                        'gender': '女'
+                    }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
@@ -302,13 +305,13 @@ const Analysis:FC<AnalysisProps>= ({ }): ReactElement =>{
                     >
                         <Input style={{ marginLeft: "-60px" }} />
                     </Form.Item>
-                    <Form.Item
-                        labelAlign="left"
-                        label="Gender"
-                        name="gender"
-                        rules={[{ required: true, message: "Please input your username!" }]}
+                    <Form.Item labelAlign="left" name="gender" label="gender"
+                        rules={[{ required: true, message: 'Please pick an item!' }]}
                     >
-                        <Input style={{ marginLeft: "-60px" }} />
+                        <Radio.Group style={{ marginLeft: "-60px" }}>
+                            <Radio value="女">女</Radio>
+                            <Radio value="男">男</Radio>
+                        </Radio.Group>
                     </Form.Item>
                     <Form.Item
                         labelAlign="left"

@@ -7,6 +7,7 @@ import {
   AppstoreAddOutlined,
   FileTextOutlined,
   BlockOutlined,
+  UserOutlined
 } from '@ant-design/icons';
 
 const RouteList: any[] = [
@@ -16,6 +17,13 @@ const RouteList: any[] = [
     icon: <HomeOutlined />,
     isVisible: true,
     path: '/',
+  },
+  {
+    title: 'admin',
+    key:'admin',
+    icon: <UserOutlined />,
+    isVisible: true,
+    path: '/admin',
   },
   {
     title: '列表一',

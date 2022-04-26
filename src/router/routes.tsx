@@ -11,6 +11,7 @@ const Index = lazy(() => import('../view/index/index'))
 const Xx = lazy(() => import('../view/world/xx/xx'))
 const WorldIndex = lazy(() => import('../view/world/worldIndex/worldIndex'))
 const Analysis =lazy(() => import('../view/analysis/analysis'))
+const Admin =lazy(() => import('@/view/admin/admin'))
 
 export const mainRoutes = [
     { path: "/", element: <Index />, },
@@ -18,6 +19,10 @@ export const mainRoutes = [
     {
         path: '/analysis',
         element: <Analysis />
+    },
+    {
+        path: '/admin',
+        element: <Admin />
     },
     {
         path: '/world', element: <World />, mate: true, childen: [

@@ -13,7 +13,7 @@ import {
 } from '@ant-design/icons';
 import "./tab.scss"
 import { Link,useNavigate } from 'react-router-dom';
-import RouteList from './indexRoutes'
+import RouteList from '@/router/indexRoutes'
 import { createBreadAction } from "../../redux/bread_action"
 import store from "../../redux/store"
 

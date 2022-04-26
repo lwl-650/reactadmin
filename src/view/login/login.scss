@@ -1,8 +1,11 @@
-.login{
+.bglogin {
     width: 100vw;
     height: 100vh;
-    background-color: red;
-    .k{
+    background-image: url("@/static/img/bglogin.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    .k {
         color: #ffffff;
     }
 }
