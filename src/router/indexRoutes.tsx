@@ -38,14 +38,8 @@ const RouteList: any[] = [
         icon:<BlockOutlined />,
         isVisible: true,
         path: '/analysis',
-      },
-      {
-        title: '信息',
-        key:'列表一,信息',
-        icon: <FileTextOutlined />,
-        isVisible: true,
-        path: '/world/a',
       }
+     
     ]
   },
   {
@@ -63,12 +57,13 @@ const RouteList: any[] = [
         path: '/world',
       },
       {
-        title: '设置',
-        key: '列表二,设置',
-        icon: <SettingOutlined />,
+        title: '请求记录',
+        key: '列表二,请求记录',
+        icon: <FileTextOutlined />,
         isVisible: true,
-        path: '/world/a',
+        path: '/who',
       }
+     
     ]
   },
 

@@ -9,7 +9,6 @@ import qs from 'qs'
  
  
  axios.defaults.transformRequest =  (data:any) =>{
-   console.log(data,"==========")
      console.log(data instanceof FormData)
      if (data instanceof FormData) {
          return data
@@ -17,9 +16,6 @@ import qs from 'qs'
          let Postdata = qs.stringify(data)
          return Postdata
      }
- 
- 
- 
  }
  
  // 路由请求拦截
@@ -47,8 +43,6 @@ import qs from 'qs'
      error => {
          return error// 返回接口返回的错误信息
      })
- 
- 
  
  
  export default axios

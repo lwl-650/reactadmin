@@ -6,13 +6,13 @@ import Login from "../view/login/login";
 
 const World = lazy(() => import("../view/world/world"))
 const Err = lazy(() => import("../view/err/err"))
-const A = lazy(() => import('../view/world/a/a'))
+
 const Index = lazy(() => import('../view/index/index'))
 const Xx = lazy(() => import('../view/world/xx/xx'))
 const WorldIndex = lazy(() => import('../view/world/worldIndex/worldIndex'))
 const Analysis =lazy(() => import('../view/analysis/analysis'))
 const Admin =lazy(() => import('@/view/admin/admin'))
-
+const Who =lazy(() => import('@/view/who/who'))
 export const mainRoutes = [
     { path: "/", element: <Index />, },
     { path: "/*", element: <Err /> },
@@ -37,9 +37,9 @@ export const mainRoutes = [
         ],
 
     },
-     {
-        path: '/world/a',
-        element: <A />
+    {
+        path: '/who',
+        element: <Who />
     },
     {
         path: '/login',
@@ -52,7 +52,4 @@ export const adminRoutes = [
     {
         path: '/world',
         element: <World />
-    }, {
-        path: '/world/a',
-        element: <A />
     }]

@@ -40,3 +40,11 @@ export function addUser(data:any) {
         data
     })
 }
+
+export function findRhttp(data:any) {
+    return request({
+        url: '/findRhttp',
+        method: 'post',
+        data
+    })
+}
