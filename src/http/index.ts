@@ -13,8 +13,9 @@ import qs from 'qs'
      if (data instanceof FormData) {
          return data
      } else {
-         let Postdata = qs.stringify(data)
-         return Postdata
+        //  let Postdata = qs.stringify(data)
+        //  return Postdata
+         return data
      }
  }
  

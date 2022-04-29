@@ -44,7 +44,7 @@ export function addUser(data:any) {
 export function findRhttp(data:any) {
     return request({
         url: '/findRhttp',
-        method: 'post',
+        method: 'get',
         data
     })
 }

@@ -144,7 +144,6 @@ const Who: React.FC<WhoProps> = (): React.ReactElement => {
 
     return (
         <>
-
             <div className="r_box">
                 <div className="r_box_form">
                     <Form
@@ -203,7 +202,6 @@ const Who: React.FC<WhoProps> = (): React.ReactElement => {
                     onChange={handleTableChange}
                 />
             </div>
-
         </>
     )
 }
