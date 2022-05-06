@@ -73,6 +73,10 @@ const columns = [
         )
     },
     {
+        title: '权限',
+        dataIndex: 'adminid',
+    },
+    {
         title: '时间',
         dataIndex: 'r_time',
     },
@@ -93,13 +97,9 @@ const Who: React.FC<WhoProps> = (): React.ReactElement => {
     const [loading, setLoading] = React.useState(false)
     const [condition, setCondition] = React.useState({ username: "", method: "", status: "" })
 
-
-    const getRandomuserParams = (params: any) => ({
-        results: params.pageSize,
-        page: params.current,
-        ...params,
-    });
     const handleTableChange = (pagination: any, filters: any, sorter: any) => {
+        console.log("🐱‍🏍 => file: who.tsx => line 97 => handleTableChange => pagination", pagination)
+
         fetch({
             sortField: sorter.field,
             sortOrder: sorter.order,
@@ -112,12 +112,14 @@ const Who: React.FC<WhoProps> = (): React.ReactElement => {
         setLoading(true);
         console.log(params.pagination)
         console.log({ ...params.pagination, ...condition })
-        findRhttp({ ...params.pagination}).then((res: any) => {
-            console.log(res)
-            setLoading(false)
-            setData(res.data.data)
-            setPagination({ ...params.pagination, total: res.data.count })
-        })
+
+        findRhttp({ ...params.pagination })
+            .then((res: any) => {
+                console.log(res)
+                setLoading(false)
+                setData(res.data.data)
+                setPagination({ ...params.pagination, total: res.data.count })
+            })
     }
     const onFinish = (values: any) => {
         console.log('Success:', values.method);

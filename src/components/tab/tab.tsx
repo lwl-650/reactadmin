@@ -5,14 +5,14 @@ import {
   Tag, Button, Avatar, message
 } from 'antd';
 import {
- 
+
   PoweroffOutlined,
   ClockCircleOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined
 } from '@ant-design/icons';
 import "./tab.scss"
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import RouteList from '@/router/indexRoutes'
 import { createBreadAction } from "../../redux/bread_action"
 import store from "../../redux/store"
@@ -38,7 +38,7 @@ interface TagObj {
 const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
   const { Header, Content, Sider } = Layout;
   const { SubMenu } = Menu
-  const  navigate=useNavigate()
+  const navigate = useNavigate()
   // useEffect(() => {
   //   console.log(11)
   // },collapsed);
@@ -54,10 +54,11 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
     clearTimeout(timer)
     setLoading(true)
     timer = setTimeout(() => {
-      
+
       setLoading(false)
       message.success("退出成功", 1)
       navigate("/login")
+      // useNavigate()("/login")
     }, 1500)
 
   }
@@ -79,8 +80,8 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
       tagArr.push(tag)
       tagObj.color = "#3b5999"
       tagObj.title = tag
-      tagList.forEach((item:any) => {
-        item.color="default"
+      tagList.forEach((item: any) => {
+        item.color = "default"
       });
       tagList.push(tagObj)
       setTagList([...tagList])
@@ -90,7 +91,7 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
     localStorage.setItem('tagArr', JSON.stringify(tagArr))
     console.log("🐱‍🏍 => file: tab.tsx => line 90 => fn => tagList", tagList)
     localStorage.setItem('tagList', JSON.stringify(tagList))
-    
+
 
 
 
@@ -197,7 +198,7 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
 
             <Popover placement="topLeft" title="Title" content={content} >
               <div className="show-avatar">
-                <Avatar src="https://joeschmoe.io/api/v1/random" size={40}>
+                <Avatar src="http://q.vuetitle.lwlsl.top/admin.jpg" size={40}>
 
                 </Avatar>
               </div>

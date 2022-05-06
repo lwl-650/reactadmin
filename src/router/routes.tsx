@@ -13,6 +13,7 @@ const WorldIndex = lazy(() => import('../view/world/worldIndex/worldIndex'))
 const Analysis =lazy(() => import('../view/analysis/analysis'))
 const Admin =lazy(() => import('@/view/admin/admin'))
 const Who =lazy(() => import('@/view/who/who'))
+const Host =lazy(() => import('@/view/host/host'))
 export const mainRoutes = [
     { path: "/", element: <Index />, },
     { path: "/*", element: <Err /> },
@@ -45,7 +46,10 @@ export const mainRoutes = [
         path: '/login',
         element: <Login />
     },
-
+    {
+        path: '/host',
+        element: <Host />
+    },
 ]
 
 export const adminRoutes = [

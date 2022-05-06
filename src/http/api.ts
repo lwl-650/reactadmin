@@ -1,7 +1,7 @@
 import request from './index'
 // import qs from 'qs';
 // 登录
-export function findId(data:any) {
+export function findId(data: any) {
     console.log(data)
     return request({
         url: '/findId',
@@ -10,7 +10,7 @@ export function findId(data:any) {
     })
 }
 
-export function findAll(data:any) {
+export function findAll(data: any) {
     console.log(data)
     return request({
         url: '/find',
@@ -23,7 +23,7 @@ export function findAll(data:any) {
  * @param data 
  * @returns 
  */
-export function delById(data:any) {
+export function delById(data: any) {
     console.log(data)
     return request({
         url: '/delById',
@@ -32,7 +32,7 @@ export function delById(data:any) {
     })
 }
 
-export function addUser(data:any) {
+export function addUser(data: any) {
     console.log(data)
     return request({
         url: '/addUser',
@@ -41,10 +41,16 @@ export function addUser(data:any) {
     })
 }
 
-export function findRhttp(data:any) {
-    return request({
-        url: '/findRhttp',
-        method: 'get',
-        data
-    })
+export function findRhttp(data: any) {
+    return request.get(
+        '/findRhttp',
+        { params: data }
+    )
+}
+
+export function findAdmin(data: any) {
+    return request.get(
+        '/findRhttp',
+        { params: data }
+    )
 }

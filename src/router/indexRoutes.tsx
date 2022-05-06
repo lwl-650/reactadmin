@@ -1,6 +1,7 @@
 
 import {
   SettingOutlined,
+  WindowsOutlined,
   HomeOutlined,
   BranchesOutlined,
   ControlOutlined,
@@ -66,6 +67,12 @@ const RouteList: any[] = [
      
     ]
   },
-
+  {
+    title: '主机配置',
+    key:'主机配置',
+    icon: <WindowsOutlined />,
+    isVisible: true,
+    path: '/host',
+  },
 ]
 export default RouteList
