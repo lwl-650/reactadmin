@@ -54,3 +54,9 @@ export function findAdmin(data: any) {
         { params: data }
     )
 }
+
+export function getCpu() {
+    return request.get(
+        '/getCpu',
+    )
+}
