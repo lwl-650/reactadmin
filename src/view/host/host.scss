@@ -8,12 +8,17 @@
 .titleDiv {
     display: flex;
     padding: 5px 0;
+
     div {
         height: 100%;
         display: block;
         font-weight: bold;
     }
+    .disk{
+        color: gray;
+    }
 }
-.ant-col{
-    padding: 25px;
+
+.ant-card {
+    margin: 10px;
 }

@@ -31,7 +31,6 @@ const RouterIndex = () => {
                 {getRoute(mainRoutes)}
             </Routes>
         </Router>
-
     )
 }
 
