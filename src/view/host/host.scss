@@ -2,7 +2,7 @@
     width: 100%;
     height: 100%;
     background: rgb(231, 219, 219);
-    padding: 20px;
+    padding: 10px;
 }
 
 .titleDiv {
@@ -22,3 +22,17 @@
 .ant-card {
     margin: 10px;
 }
+.tag{
+    color: #000;
+    height: 0.36rem;
+}
+
+// 1400px
+@media screen and (max-width: 1400px) {
+ 
+    .ant-row{
+        // display: block;
+    }
+     
+}
+

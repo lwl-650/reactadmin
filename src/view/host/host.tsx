@@ -173,15 +173,14 @@ version:""
               {data.disk.map((item: any) => {
                 return (
                   <div className="titleDiv" key={item.path}>
-                    <div>{item.path}盘&nbsp;&nbsp;</div>
-                    <div className="disk">总:</div> {getDisk(item.total)}
+                    <div>{item.path}盘&nbsp;&nbsp;</div> {getDisk(item.total)}
                     &nbsp;&nbsp;
-                    <div className="disk">已使用:</div> {getDisk(item.used)}
+                    <div className="disk">已:</div> {getDisk(item.used)}
                     &nbsp;&nbsp;
-                    <div className="disk">未使用:</div> {getDisk(item.free)}
+                    <div className="disk">未:</div> {getDisk(item.free)}
                     &nbsp;&nbsp;
-                    <div className="disk">使用率:</div>&nbsp;
-                    <Tag color="#87d068">{getNum(item.used / item.total)}%</Tag>
+                    <div className="disk">比例:</div>&nbsp;
+                    <Tag className="tag" color="#87d068">{getNum(item.used / item.total)}%</Tag>
                   </div>
                 );
               })}

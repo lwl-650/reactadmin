@@ -14,6 +14,7 @@ const Analysis =lazy(() => import('../view/analysis/analysis'))
 const Admin =lazy(() => import('@/view/admin/admin'))
 const Who =lazy(() => import('@/view/who/who'))
 const Host =lazy(() => import('@/view/host/host'))
+const Drag =lazy(() => import('@/view/drag/drag'))
 export const mainRoutes = [
     { path: "/", element: <Index />, },
     { path: "/*", element: <Err /> },
@@ -49,6 +50,10 @@ export const mainRoutes = [
     {
         path: '/host',
         element: <Host />
+    },
+    {
+        path: '/drag',
+        element: <Drag />
     },
 ]
 

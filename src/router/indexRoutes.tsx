@@ -74,5 +74,12 @@ const RouteList: any[] = [
     isVisible: true,
     path: '/host',
   },
+  {
+    title: '拖拽',
+    key:'拖拽',
+    icon: <WindowsOutlined />,
+    isVisible: true,
+    path: '/drag',
+  },
 ]
 export default RouteList
