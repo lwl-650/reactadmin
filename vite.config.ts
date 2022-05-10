@@ -29,6 +29,12 @@ export default defineConfig({
         // target: 'http://go.lwlsl.top:8088', 
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
+      },
+      '/dpc': {
+        // target: 'http://localhost:8088',   //代理接口
+        target: 'http://go.lwlsl.top:8088', 
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/dpc/, '')
       }
     }
   },
