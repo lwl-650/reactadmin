@@ -3,8 +3,10 @@ import copy from "copy-to-clipboard";
 import "./drag.scss";
 import { StepBackwardOutlined } from "@ant-design/icons";
 import Socket from "./socket";
+import ChatList from "@/components/webChat/chatList/chatList";
+import ChatInput from "@/components/webChat/chatInput/chatInput";
 
-interface DragProps {}
+interface DragProps { }
 
 const drag: React.FC<DragProps> = (): React.ReactElement => {
   let socket = new Socket("ws://localhost:8088/web?userId=zs", "");
@@ -40,17 +42,20 @@ const drag: React.FC<DragProps> = (): React.ReactElement => {
     //   alert("err");
     // }
   };
+  const geta = (e: any) => {
+    console.log(e)
+  }
 
   return (
-    <>
-      <StepBackwardOutlined
-        style={{ fontSize: "30px" }}
-        onClick={getFont.bind(this)}
-      />
-
-      <b onClick={getFont.bind(this)}>dsds</b>
-    
-    </>
-  );
-};
-export default drag;
+    <div className="chat">
+      <div className="left">
+        <ChatList getList={geta} />
+        <ChatList getList={geta} />
+      </div>
+      <div className="right">
+        <ChatInput />
+      </div>
+    </div>
+  )
+}
+export default drag

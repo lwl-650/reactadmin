@@ -12,7 +12,8 @@ export default defineConfig({
   },
   server: {
     //服务器主机名
-    host: "localhost",
+    // host: "localhost",
+    host: true, //ip访问指定服务器应该监听哪个 IP 地址。 如果将此设置为 0.0.0.0 或者 true 将监听所有地址，包括局域网和公网地址
     //端口号
     port: 3002,// 不知为何更改会有问题
     //设为 true 时若端口已被占用则会直接退出，
@@ -32,7 +33,7 @@ export default defineConfig({
       },
       '/dpc': {
         // target: 'http://localhost:8088',   //代理接口
-        target: 'http://go.lwlsl.top:8088', 
+        target: 'http://go.lwlsl.top:8088',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/dpc/, '')
       }

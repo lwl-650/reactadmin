@@ -1,0 +1,23 @@
+.userlist {
+  border: 1px solid red;
+  padding: 5px;
+  display: flex;
+}
+.info {
+  //   border: 1px solid red;
+  width: 80%;
+}
+.name {
+  display: flex;
+  justify-content: space-between;
+  color: gray;
+  div:first-child {
+    font-weight: bold;
+    color: #000;
+  }
+}
+.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
