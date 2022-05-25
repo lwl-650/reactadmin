@@ -147,13 +147,12 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
                 return (
                   <SubMenu key={item.key} icon={item.icon ? item.icon : ''} title={item.title}>
                     {
-                      item.children.map((data: any) => {
-                        return (
-                          <Menu.Item key={data.key} icon={data.icon ? data.icon : ''} >
-                            <Link to={data.path}>{data.title}</Link>
-                          </Menu.Item>
-                        )
-                      })
+                      item.children.map((data: any) => (
+                        <Menu.Item key={data.key} icon={data.icon ? data.icon : ''} >
+                          <Link to={data.path}>{data.title}</Link>
+                        </Menu.Item>
+                      )
+                      )
                     }
                   </SubMenu>
                 )
@@ -175,20 +174,18 @@ const tab: FC<TabProps> = ({ value, title, children }): ReactElement => {
           <div className="tagList">
             <Breadcrumb>
               {
-                routerArr.map((item: string, index: string) => {
-                  return <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>
-                })
+                routerArr.map((item: string, index: string) => <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>)
               }
 
             </Breadcrumb>
             <div className="tag">
 
               {
-                tagList.map(({ title, color }: TabProps, index: string): ReactElement => {
-                  return <Tag className='hover' closable key={title} icon={<ClockCircleOutlined />} color={color}>
+                tagList.map(({ title, color }: TabProps, index: string): ReactElement =>
+                (<Tag className='hover' closable key={title} icon={<ClockCircleOutlined />} color={color}>
                     {title}
-                  </Tag>
-                })
+                  </Tag>)
+                )
               }
 
             </div>
