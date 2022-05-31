@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="height: 9999px;"></div>
+    <script>
+        function showTop() {
+            var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+            console.log('滚动条位置：' + scrollTop);
+        }
+        window.onscroll = showTop		//当滚动时会很高频率执行
+        //非立即执行版本
+        function debounce(fn, delay) {
+            let timeout; // 创建一个标记用来存放定时器的返回值
+            return function () {
+                clearTimeout(timeout); // 每当事件触发的时候把前一个 setTimeout clear 掉
+                timeout = setTimeout(() => { // 然后又创建一个新的 setTimeout, 这样就能保证输入字符后的 interval 间隔内如果还有字符输入的话，就不会执行 fn 函数
+                    fn.apply(this, arguments);
+                }, delay);
+            };
+        }
+
+        window.onscroll = debounce(showTop, 1000)
+
+    </script>
+</body>
+
+</html>

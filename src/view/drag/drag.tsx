@@ -9,7 +9,7 @@ import ChatInput from "@/components/webChat/chatInput/chatInput";
 interface DragProps { }
 
 const drag: React.FC<DragProps> = (): React.ReactElement => {
-  let socket = new Socket("ws://localhost:8088/web?userId=zs", "");
+  let socket = new Socket("ws://localhost:8088/web?id=zs", "");
 
   React.useEffect(() => {
     socket.onmessage(processingData.bind(this));
@@ -46,6 +46,10 @@ const drag: React.FC<DragProps> = (): React.ReactElement => {
     console.log(e)
   }
 
+  const send = (text: string) => {
+    socket.send(text)
+  }
+
   return (
     <div className="chat">
       <div className="left">
@@ -53,7 +57,8 @@ const drag: React.FC<DragProps> = (): React.ReactElement => {
         <ChatList getList={geta} />
       </div>
       <div className="right">
-        <ChatInput />
+        <ChatInput addSend={send.bind(this)} />
+        {/* <button onClick={send.bind(this)}>45</button> */}
       </div>
     </div>
   )
