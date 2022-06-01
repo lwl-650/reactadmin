@@ -9,7 +9,7 @@ import ChatInput from "@/components/webChat/chatInput/chatInput";
 interface DragProps { }
 
 const drag: React.FC<DragProps> = (): React.ReactElement => {
-  let socket = new Socket("ws://localhost:8088/web?id=zs", "");
+  let socket = new Socket("ws://localhost:8087/web?id=zs", "");
 
   React.useEffect(() => {
     socket.onmessage(processingData.bind(this));
