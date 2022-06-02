@@ -199,6 +199,7 @@ const Who: React.FC<WhoProps> = (): React.ReactElement => {
                     columns={columns}
                     rowKey={(record: any) => record.r_id}
                     dataSource={data}
+                    bordered={true}
                     pagination={pagination}
                     loading={loading}
                     onChange={handleTableChange}

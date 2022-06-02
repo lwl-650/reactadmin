@@ -12,6 +12,7 @@ import {
   Input
 } from "antd";
 import * as echarts from 'echarts';
+import store from "@/redux/store"
 
 interface IndexProps {
   // onClick ?:event: MouseEvent<HTMLDivElement>||undefined,
@@ -25,8 +26,15 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
 
   const [list, setList] = useState([1, 2, 34, 5, 6])
 
+  console.log(store.getState())
   useEffect(() => {
-    var myChart = echarts.init(document.getElementById('main') as HTMLElement);
+    // setInterval(() => {
+    //   list[0]++
+    //   setList(list)
+    //   console.log(list)
+    // }, 5000)
+
+    const myChart = echarts.init(document.getElementById('main') as HTMLElement);
     // 绘制图表
     myChart.setOption({
       title: { text: 'ECharts 入门示例' },
@@ -38,9 +46,40 @@ const Index: FC<IndexProps> = ({ onClick, children }): ReactElement => {
       series: [{
         name: '销量',
         type: 'bar',
-        data: [5, 20, 36, 10, 10, 20]
+        data: [32, 45, 23, 56, 39]
       }]
     });
+
+
+    var data1 = [4, 8, 2, 5, 3];
+    var data2 = [32, 45, 23, 56, 39]
+    //计时器动态更新
+    setInterval(() => {
+      data1 = data1.map(item => {
+        item += 9
+        if (item > 80) {
+          item += 25
+        }
+        return item
+      })
+      data2 = data2.map(item => {
+        item++
+        if (item > 120) {
+          item += 40
+        }
+        return item
+      })
+      myChart.setOption({
+        series: [
+          {
+            data: data1
+          },
+          {
+            data: data2
+          }
+        ]
+      })
+    }, 5000);
 
   }, []);
 
